@@ -1,16 +1,13 @@
-# This is a sample Python script.
+import os
+import pyexiv2
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Confirm the working directory. By default the working directory is the same folder as this script.
+defaultPath = os.getcwd()
+changePath = input('Do you want to change working folder? (Y/N)')
+if changePath == 'Y':
+    workingPath = input('Copy your working folder:')
+else:
+    workingPath = defaultPath
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-
+    print(defaultPath)
