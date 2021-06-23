@@ -27,17 +27,29 @@ def rootFolder():
 def photoList(path):
     # Generate a tuple include all files and folders. it yields a 3-tuple (dirpath, dirnames, filenames)
     fullList = os.walk(path, True)
+    supportedFormat = ('.jpg', '.jpeg')
+    finallist = list()
+    # Check each file for the file format.
+    for dirpath, dirnames, filenames in fullList:
+        for filename in filenames:
+            fullPath = os.path.join(dirpath, filename)
+            # Seperate file path with file extension
+            fileExtension = os.path.splitext(fullPath)
+            # Check if the file is image format.
+            for ext in fileExtension:
+                for supportedExt in supportedFormat:
+                    if ext == supportedExt:
+                        finallist.append(fullPath)
+    return finallist
 
 
 # Get number of image files.
+def getImageCount(list):
+    return len(list)
 
 
 if __name__ == '__main__':
-    testpath = input('your path:').strip()
-    path = os.path.abspath(testpath)
-    tempList = os.walk(testpath)
-    for a, b, c in tempList:
-        print(a)
-        print(b)
-        print(c)
+    workingPath = rootFolder()
+    photoList = photoList(workingPath)
+    print(len(photoList))
     aaa = 1
