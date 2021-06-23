@@ -27,7 +27,7 @@ def rootFolder():
 def photoList(path):
     # Generate a tuple include all files and folders. it yields a 3-tuple (dirpath, dirnames, filenames)
     fullList = os.walk(path, True)
-    supportedFormat = ('.jpg', '.jpeg')
+    supportedFormat = ('.jpg', '.jpeg', '.tiff', '.dng', '.arw', '.png', '.raf', '.rw2', 'psd', '.bmp', '.heic')
     finallist = list()
     # Check each file for the file format.
     for dirpath, dirnames, filenames in fullList:
@@ -38,7 +38,7 @@ def photoList(path):
             # Check if the file is image format.
             for ext in fileExtension:
                 for supportedExt in supportedFormat:
-                    if ext == supportedExt:
+                    if ext.lower() == supportedExt:
                         finallist.append(fullPath)
     return finallist
 
