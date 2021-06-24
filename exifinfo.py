@@ -2,6 +2,7 @@ import pyexiv2
 import time
 import os
 
+
 def readEXIF(filelist):
     result = {}
     # Read the EXIF info and input into dict 'result'
@@ -9,11 +10,12 @@ def readEXIF(filelist):
     for file in filelist:
         with pyexiv2.Image(file) as img:
             exifData = img.read_exif()
-            datetime = exifData['Exif.Image.DateTime']
-            if len(datetime) > 3:
-                result[file] = datetime
-            else:
+            try:
+                datetime = exifData['Exif.Image.DateTime']
+            except:
                 result[file] = 'NA'
+            else:
+                result[file] = datetime
     # Read file modified time if EXIF info not available.
     for file, date in result.items():
         if date == 'NA':
@@ -22,8 +24,10 @@ def readEXIF(filelist):
 
 
 def readModifyTime(filepath):
+    # The time get from os.path is in float format
     timeFloat = os.path.getmtime(filepath)
+    # Convert float time format to a time struct
     timeStruct = time.localtime(timeFloat)
-
-
-    return timeFinal
+    # Conver time struct to the same format as EXIF extracted.
+    timestring = time.strftime('%Y:%m:%d %H:%M:%S', timeStruct)
+    return timestring

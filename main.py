@@ -1,5 +1,6 @@
 import os
 import sys
+import exifinfo
 
 
 # Confirm the working path is eligible.
@@ -52,4 +53,5 @@ if __name__ == '__main__':
     workingPath = rootFolder()
     photoList = photoList(workingPath)
     print(len(photoList))
+    dates = exifinfo.readEXIF(photoList)
     aaa = 1
