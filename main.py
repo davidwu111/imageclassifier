@@ -27,8 +27,9 @@ def rootFolder():
 # Get a list of images in tuple.
 def photoList(path):
     # Generate a tuple include all files and folders. it yields a 3-tuple (dirpath, dirnames, filenames)
+    # HEIC files are not supported by default by exiv2 due to patent reasons.
     fullList = os.walk(path, True)
-    supportedFormat = ('.jpg', '.jpeg', '.tiff', '.dng', '.arw', '.png', '.raf', '.rw2', 'psd', '.bmp', '.heic')
+    supportedFormat = ('.jpg', '.jpeg', '.tiff', '.dng', '.arw', '.png', '.raf', '.rw2', 'psd', '.bmp')
     finallist = list()
     # Check each file for the file format.
     for dirpath, dirnames, filenames in fullList:
